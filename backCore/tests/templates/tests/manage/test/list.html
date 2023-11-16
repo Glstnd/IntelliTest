@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}My courses{% endblock %}
+{% block title %}My tests{% endblock %}
 
 {% block content %}
-  <h1>My courses</h1>
+  <h1>My tests</h1>
   <div class="module">
     {% for test in object_list %}
-      <div class="course-info">
+      <div class="test-info">
         <h3>{{ test.title }}</h3>
         <p>
           <a href="{% url "test_edit" test.id %}">Edit</a>
@@ -19,10 +19,10 @@
         </p>
       </div>
     {% empty %}
-      <p>You haven't created any courses yet.</p>
+      <p>You haven't created any tests yet.</p>
     {% endfor %}
     <p>
-      <a href="{% url "test_create" %}" class="button">Create new course</a>
+      <a href="{% url "test_create" %}" class="button">Create new test</a>
     </p>
   </div>
 {% endblock %}

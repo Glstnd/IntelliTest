@@ -2,26 +2,26 @@
 
 {% block title %}
   {% if object %}
-    Edit course "{{ object.title }}"
+    Edit test "{{ object.title }}"
   {% else %}
-    Create a new course
+    Create a new test
   {% endif %}
 {% endblock %}
 
 {% block content %}
   <h1>
     {% if object %}
-      Edit course "{{ object.title }}"
+      Edit test "{{ object.title }}"
     {% else %}
-      Create a new course
+      Create a new test
     {% endif %}
   </h1>
   <div class="module">
-    <h2>Course info</h2>
+    <h2>Test info</h2>
     <form method="post">
       {{ form.as_p }}
       {% csrf_token %}
-      <p><input type="submit" value="Save course"></p>
+      <p><input type="submit" value="Save test"></p>
     </form>
   </div>
 {% endblock %}
