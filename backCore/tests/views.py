@@ -95,7 +95,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
     template_name = 'tests/manage/content/form.html'
 
     def get_model(self, model_name):
-        if model_name in ['text', 'video', 'image', 'file']:
+        if model_name in ['question', 'video', 'image', 'file']:
             return apps.get_model(app_label='tests',
                                   model_name=model_name)
         return None
@@ -109,8 +109,8 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 
     def dispatch(self, request, module_id, model_name, id=None):
         self.module = get_object_or_404(Module,
-                                       id=module_id,
-                                       test__owner=request.user)
+                                        id=module_id,
+                                        test__owner=request.user)
         self.model = self.get_model(model_name)
         if id:
             self.obj = get_object_or_404(self.model,
@@ -144,8 +144,8 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 class ContentDeleteView(View):
     def post(self, request, id):
         content = get_object_or_404(Content,
-                               id=id,
-                               module__test__owner=request.user)
+                                    id=id,
+                                    module__test__owner=request.user)
         module = content.module
         content.item.delete()
         content.delete()

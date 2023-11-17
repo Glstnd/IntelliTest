@@ -49,10 +49,10 @@
         <p>This module has no contents yet.</p>
       {% endfor %}
     </div>
-    <h3>Add new content:</h3>
+    <h3>Add new question:</h3>
     <ul class="content-types">
       <li>
-        <a href="{% url "module_content_create" module.id "text" %}">Text</a>
+        <a href="{% url "module_content_create" module.id "question" %}">Question</a>
       </li>
       <li>
         <a href="{% url "module_content_create" module.id "image" %}">Image</a>

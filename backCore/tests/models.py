@@ -37,8 +37,8 @@ class Test(models.Model):
 
 class Module(models.Model):
     test = models.ForeignKey(Test,
-                               related_name='modules',
-                               on_delete=models.CASCADE)
+                             related_name='modules',
+                             on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     order = OrderField(blank=True, for_fields=['test'])
@@ -57,7 +57,7 @@ class Content(models.Model):
     content_type = models.ForeignKey(ContentType,
                                      on_delete=models.CASCADE,
                                      limit_choices_to={'model__in':(
-                                     'text',
+                                     'question',
                                      'video',
                                      'image',
                                      'file')})
@@ -85,7 +85,9 @@ class ItemBase(models.Model):
 
 
 class Text(ItemBase):
-    content = models.TextField()
+    question = models.ForeignKey(Module,
+                                 related_name='texts',
+                                 on_delete=models.CASCADE)
 
 
 class File(ItemBase):
