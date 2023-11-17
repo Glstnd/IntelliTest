@@ -1,5 +1,5 @@
 """
-ASGI config for backCore project.
+ASGI config for IntelliTest project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backCore.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'IntelliTest.settings')
 
 application = get_asgi_application()
