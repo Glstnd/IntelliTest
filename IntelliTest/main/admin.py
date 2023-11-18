@@ -1,3 +1,11 @@
 from django.contrib import admin
+from .models import QuizCategory, QuizQuestion
 
-# Register your models here.
+admin.site.register(QuizCategory)
+
+
+class QuizQuestionAdmin(admin.ModelAdmin):
+    list_display = ['question', 'level']
+
+
+admin.site.register(QuizQuestion, QuizQuestionAdmin)
