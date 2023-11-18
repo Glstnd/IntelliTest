@@ -24,6 +24,6 @@ def all_categories(request):
 
 
 def category_questions(request, cat_id):
-    category = QuizCategory.get(id=cat_id)
-    questions = QuizQuestion.objects.get(category=category)
-    return render(request, 'category-questions.html')
+    category = QuizCategory.objects.get(id=cat_id)
+    questions = QuizQuestion.objects.filter(category=category)
+    return render(request, 'category-questions.html', {"questions": questions, "category": category})
