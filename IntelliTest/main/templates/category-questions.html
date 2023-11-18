@@ -2,35 +2,33 @@
 {% block title %}{{category.title}} Questions{% endblock %}
 {% block content %}
 <h2 class="my-4">Тест: <span class="text-primary">{{category.title}}</span></h2>
+	{% for question in questions  %}
 	<div class="card my-4 border-dark shadow">
-		<form method="post" action="{% url 'submit_answer' category.id question.id %}">
-		{% csrf_token %}
-			<h4 class="card-header border-dark">{{question.question}}</h4>
-			<div class="card-body">
-				<table class="table table-bordered">
-					<tr>
-						<td><input id="option_1" name="answer" type="radio" /></td>
-						<th><label for="option_1">{{question.opt_1}}</label></th>
-					</tr>
-					<tr>
-						<td><input id="option_2" name="answer"  type="radio" /></td>
-						<th><label for="option_2">{{question.opt_2}}</label></th>
-					</tr>
-					<tr>
-						<td><input id="option_3" name="answer"  type="radio" /></td>
-						<th><label for="option_3">{{question.opt_3}}</label></th>
-					</tr>
-					<tr>
-						<td><input id="option_4" name="answer"  type="radio" /></td>
-						<th><label for="option_4">{{question.opt_4}}</label></th>
-					</tr>
-				</table>
-			</div>
-			<div class="card-footer">
-				<input type="submit" name="skip" class="btn btn-warning skipBtn" value="Skip"/>
-				<input type="submit" name="submit" class="btn btn-primary submitBtn"/>
-			</div>
-		</form>
+		<h4 class="card-header border-dark">{{question.question}}</h4>
+		<div class="card-body">
+			<table class="table table-bordered">
+				<tr>
+					<td><input id="option_1" name="answer" type="radio" /></td>
+					<th><label for="option_1">{{question.opt_1}}</label></th>
+				</tr>
+				<tr>
+					<td><input id="option_2" name="answer"  type="radio" /></td>
+					<th><label for="option_2">{{question.opt_2}}</label></th>
+				</tr>
+				<tr>
+					<td><input id="option_3" name="answer"  type="radio" /></td>
+					<th><label for="option_3">{{question.opt_3}}</label></th>
+				</tr>
+				<tr>
+					<td><input id="option_4" name="answer"  type="radio" /></td>
+					<th><label for="option_4">{{question.opt_4}}</label></th>
+				</tr>
+			</table>
+		</div>
+		<div class="card-footer">
+			<input type="submit" class="btn btn-warning" value="Skip"/>
+			<input type="submit" class="btn btn-primary"/>
+		</div>
 	</div>
-
+	{% endfor %}
 {% endblock %}
