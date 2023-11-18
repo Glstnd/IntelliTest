@@ -27,6 +27,7 @@ def all_categories(request):
 
 @login_required
 def category_questions(request, cat_id):
+<<<<<<< HEAD
     category = QuizCategory.objects.get(id=cat_id)
     question = QuizQuestion.objects.filter(category=category).order_by('id').first()
     return render(request, 'category-questions.html', {"questions": question, "category": category})
@@ -42,3 +43,8 @@ def submit_answer(request, cat_id, quest_id=1):
         return render(request, 'category-questions.html', {"questions": question, "category": category})
     else:
         return HttpResponse('Method not allowed!!!')
+=======
+    category = QuizCategory.get(id=cat_id)
+    questions = QuizQuestion.objects.get(category=category)
+    return render(request, 'category-questions.html')
+>>>>>>> parent of f09941d (add tests pages and first test)
