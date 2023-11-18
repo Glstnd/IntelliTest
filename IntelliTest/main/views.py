@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
 from . import forms
 from .models import QuizCategory, QuizQuestion
 
@@ -25,26 +23,7 @@ def all_categories(request):
     return render(request, 'all-category.html', {'data': cat_data})
 
 
-@login_required
 def category_questions(request, cat_id):
-<<<<<<< HEAD
     category = QuizCategory.objects.get(id=cat_id)
-    question = QuizQuestion.objects.filter(category=category).order_by('id').first()
-    return render(request, 'category-questions.html', {"questions": question, "category": category})
-
-
-@login_required
-def submit_answer(request, cat_id, quest_id=1):
-    if request.method == 'POST':
-        if 'skip' in request.POST:
-            return HttpResponse('Skip is clicked!')
-        category = QuizCategory.objects.get(id=cat_id)
-        question = QuizQuestion.objects.filter(category=category).order_by('id').first()
-        return render(request, 'category-questions.html', {"questions": question, "category": category})
-    else:
-        return HttpResponse('Method not allowed!!!')
-=======
-    category = QuizCategory.get(id=cat_id)
-    questions = QuizQuestion.objects.get(category=category)
-    return render(request, 'category-questions.html')
->>>>>>> parent of f09941d (add tests pages and first test)
+    questions = QuizQuestion.objects.filter(category=category)
+    return render(request, 'category-questions.html', {"questions": questions, "category": category})
