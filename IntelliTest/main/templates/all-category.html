@@ -6,7 +6,6 @@
 	<div class="col-md-4">
 		{% for category in data  %}
 		<div class="card">
-			<!img src="..." class="card-img-top" alt="Category Title">
 				<div class="card-body">
 					<h5 class="card-title"><a href="{% url 'category_questions' category.id %}">{{category.title}}</a></h5>
 					<p class="card-text">{{category.details}}</p>
