@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . import forms
 from .models import QuizCategory, QuizQuestion
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -23,7 +24,8 @@ def all_categories(request):
     return render(request, 'all-category.html', {'data': cat_data})
 
 
+@login_required
 def category_questions(request, cat_id):
-    category = QuizCategory.get(id=cat_id)
-    questions = QuizQuestion.objects.get(category=category)
-    return render(request, 'category-questions.html')
+    category = QuizCategory.objects.get(id=cat_id)
+    question = QuizQuestion.objects.filter(category=category).order_by('id').first()
+    return render(request, 'category-questions.html', {'question': question, 'category': category})
