@@ -38,7 +38,8 @@ def submit_answer(request, cat_id, quest_id):
         if 'skip' in request.POST:
             return HttpResponse('Skip is clicked!!!')
         category = QuizCategory.objects.get(id=cat_id)
-        question = QuizQuestion.objects.filter(category=category).order_by('id').first()
+        question = QuizQuestion.objects.filter(category=category, id__gt=quest_id).exclude(id=quest_id).\
+            order_by('id').first()
         return render(request, 'category-questions.html', {'question': question, 'category': category})
     else:
         return HttpResponse('Method not allowed!!!')
