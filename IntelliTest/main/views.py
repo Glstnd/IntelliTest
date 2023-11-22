@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import forms
-from .models import QuizCategory, QuizQuestion
+from .models import QuizCategory, QuizQuestion, UserSubmittedAnswer
 from django.contrib.auth.decorators import login_required
 
 
@@ -38,13 +38,22 @@ def submit_answer(request, cat_id, quest_id):
         category = QuizCategory.objects.get(id=cat_id)
         question = QuizQuestion.objects.filter(category=category, id__gt=quest_id).exclude(id=quest_id). \
             order_by('id').first()
-        if question:
-            return render(request, 'category-questions.html', {'question': question, 'category': category})
-
         if 'skip' in request.POST:
             if question:
+                quest = QuizQuestion.objects.get(id = quest_id)
+                user = request.user
+                answer = 'Not submitted'
+                UserSubmittedAnswer.objects.create(user=user, question=quest, right_answer=answer)
                 return render(request, 'category-questions.html', {'question': question, 'category': category})
         else:
-            return HttpResponse('Not more questions!')
+            quest = QuizQuestion.objects.get(id=quest_id)
+            user = request.user
+            answer = request.POST['answer']
+            UserSubmittedAnswer.objects.create(user=user, question=quest, right_answer=answer)
+        if question:
+            return render(request, 'category-questions.html', {'question': question, 'category': category})
+        else:
+            result = UserSubmittedAnswer.objects.filter(user=request.user)
+            return render(request, 'result.html', {'result': result, 'category': category})
     else:
         return HttpResponse('Method not allowed!!!')
