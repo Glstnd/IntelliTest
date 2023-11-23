@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QuizCategory, QuizQuestion, UserSubmittedAnswer
+from .models import QuizCategory, QuizQuestion, UserSubmittedAnswer, UserCategoryAttempts
 
 admin.site.register(QuizCategory)
 
@@ -16,3 +16,10 @@ class UserSubmittedAnswerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserSubmittedAnswer, UserSubmittedAnswerAdmin)
+
+
+class UserCategoryAttemptsAdmin(admin.ModelAdmin):
+    list_display = ['category', 'user', 'attempt_time']
+
+
+admin.site.register(UserCategoryAttempts, UserCategoryAttemptsAdmin)

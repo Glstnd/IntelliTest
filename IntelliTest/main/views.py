@@ -54,6 +54,29 @@ def submit_answer(request, cat_id, quest_id):
             return render(request, 'category-questions.html', {'question': question, 'category': category})
         else:
             result = UserSubmittedAnswer.objects.filter(user=request.user)
-            return render(request, 'result.html', {'result': result, 'category': category})
+            skipped = UserSubmittedAnswer.objects.filter(user=request.user, right_answer='Not submitted').count()
+            attempted = UserSubmittedAnswer.objects.filter(user=request.user).exclude(right_answer='Not submitted').count()
+            rightAns = 0
+            percentage = 0
+            for row in result:
+                if row.question.right_opt == row.right_answer:
+                    rightAns += 1
+            percentage = (rightAns*100)/result.count()
+            return render(request, 'result.html', {'result': result, 'skipped': skipped, 'attempted': attempted, 'rightAns': rightAns, 'percentage': percentage})
     else:
         return HttpResponse('Method not allowed!!!')
+
+@login_required
+def result(request):
+    result = UserSubmittedAnswer.objects.filter(user=request.user)
+    skipped = UserSubmittedAnswer.objects.filter(user=request.user, right_answer='Not submitted').count()
+    attempted = UserSubmittedAnswer.objects.filter(user=request.user).exclude(right_answer='Not submitted').count()
+    rightAns = 0
+    percentage = 0
+    for row in result:
+        if row.question.right_opt == row.right_answer:
+            rightAns += 1
+    percentage = (rightAns * 100) / result.count()
+    return render(request, 'result.html',
+                  {'result': result, 'skipped': skipped, 'attempted': attempted, 'rightAns': rightAns,
+                   'percentage': percentage})

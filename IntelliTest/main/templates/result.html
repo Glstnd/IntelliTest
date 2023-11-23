@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{category.title}} Questions {% endblock %}
 {% block content %}
-<h2 class="my-4">Result</h2>
+<h2 class="my-4">Attempted questions</h2>
 <table class = "table table-bordered">
     <thead>
         <tr>
@@ -18,9 +18,37 @@
             <td>{{row.id}}</td>
             <td>{{row.question}}</td>
             <td>{{row.question.right_opt}}</td>
-            <td>{{row.right_answer}}</td>
+            {% if row.question.right_opt == row.right_answer %}
+            <td class="bg-success text-white"> {{row.right_answer}}</td>
+            {% else %}
+            <td class="bg-danger text-white"> {{row.right_answer}}</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
+</table>
+
+<h2 class="my-4">Result detail</h2>
+<table class = "table table-bordered">
+    <tr>
+        <th>Total questions</th>
+        <td>{{result.count}}</td>
+    </tr>
+    <tr>
+        <th>Total skipped questions</th>
+        <td>{{skipped}}</td>
+    </tr>
+    <tr>
+        <th>Total attempted questions</th>
+        <td>{{attempted}}</td>
+    </tr>
+        <tr>
+        <th>Right answers</th>
+        <td>{{rightAns}}</td>
+    </tr>
+    <tr>
+        <th>Percentage</th>
+        <td>{{percentage}}%</td>
+    </tr>
 </table>
 {% endblock %}

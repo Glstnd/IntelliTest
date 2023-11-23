@@ -39,3 +39,12 @@ class UserSubmittedAnswer(models.Model):
 
     class Meta:
         verbose_name_plural = 'User Submitted Answers'
+
+
+class UserCategoryAttempts(models.Model):
+    category = models.ForeignKey(QuizCategory, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    attempt_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'User Attempts Category'
