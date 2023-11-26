@@ -9,6 +9,10 @@ def home(request):
     return render(request, 'home.html')
 
 
+def user_page(request):
+    return render(request, 'user.html')
+
+
 def register(request):
     msg = None
     form = forms.RegisterUser
