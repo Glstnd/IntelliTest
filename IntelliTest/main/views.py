@@ -84,3 +84,16 @@ def result(request):
     return render(request, 'result.html',
                   {'result': result, 'skipped': skipped, 'attempted': attempted, 'rightAns': rightAns,
                    'percentage': percentage})
+
+
+@login_required
+def statistic(request):
+    categories = QuizCategory.objects.all()
+
+    questions_dict = {}
+
+    for category in categories:
+        questions = QuizQuestion.objects.filter(category=category)
+        questions_dict.setdefault(category, questions)
+
+    return render(request, 'statistic.html', {'categories': categories, 'questions': questions_dict})

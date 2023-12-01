@@ -10,6 +10,7 @@ urlpatterns = [
     path('category-questions/<int:cat_id>', views.category_questions, name='category_questions'),
     path('submit-answer/<int:cat_id>/<int:quest_id>', views.submit_answer, name='submit_answer'),
     path('result/', views.result, name='result'),
+    path('statistic/', views.statistic, name='statistic')
 ]
 
 if settings.DEBUG:
