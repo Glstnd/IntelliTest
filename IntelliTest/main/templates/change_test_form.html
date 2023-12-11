@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Add Test Page{% endblock %}
+{% block content %}
+<div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+	      <div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href="{% url 'change_test' category.id %}" class="list-group-item active">Questions</a>
+	          {% for question in questions %}
+            <a href="{% url 'change_quest_test' category.id question.id %}" class="list-group-item">{{question.question}}</a>
+	          {% endfor %}
+	          <a href="{% url 'change_quest_test' category.id 0 %}" class="list-group-item">Добавить вопрос +++</a>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+        <div class="col-xs-12 col-sm-9 col-sm-push-3">
+	        <h3 class="my-4">
+	{{category.title}}
+</h3>
+<form action="{% url 'change_test' category.id %}" method="post">
+	{% csrf_token %}
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Category name</span>
+	  <input type="text" name="cat_name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{category.title}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Details</span>
+	  <input type="text" name="cat_details" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{category.details}}">
+	</div>
+	<button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        
+      </div><!--/row-->
+
+    </div><!--/.container-->
+
+{% endblock %}

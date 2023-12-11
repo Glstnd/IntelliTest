@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Add Test Page{% endblock %}
+{% block content %}
+<div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+	      <div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href="{% url 'change_test' category.id %}" class="list-group-item">Questions</a>
+	          {% for question in questions %}
+	          {% if question == active_question %}
+            <a href="{% url 'change_quest_test' category.id question.id %}" class="list-group-item active">{{question.question}}</a>
+	          {% else %}
+	          <a href="{% url 'change_quest_test' category.id question.id %}" class="list-group-item">{{question.question}}</a>
+	          {% endif %}
+	          {% endfor %}
+	          <a href="{% url 'change_quest_test' category.id 0 %}" class="list-group-item">Добавить вопрос +++</a>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+        <div class="col-xs-12 col-sm-9 col-sm-push-3">
+	        <h3 class="my-4">
+	{{category.title}}
+</h3>
+	        <h3 class="my-4">{{active_question.question}}</h3>
+<form action="{% url 'change_quest_test' category.id active_question.id %}" method="post">
+	{% csrf_token %}
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Question</span>
+	  <input type="text" name="question" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.question}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Option 1</span>
+	  <input type="text" name="opt_1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.opt_1}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Option 2</span>
+	  <input type="text" name="opt_2" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.opt_2}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Option 3</span>
+	  <input type="text" name="opt_3" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.opt_3}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Option 4</span>
+	  <input type="text" name="opt_4" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.opt_4}}">
+	</div>
+	<div class="input-group input-group-lg">
+	  <span class="input-group-text" id="inputGroup-sizing-lg">Right option</span>
+	  <input type="text" name="right_opt" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+	         value="{{active_question.right_opt}}">
+	</div>
+	<button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        
+      </div><!--/row-->
+
+    </div><!--/.container-->
+
+{% endblock %}

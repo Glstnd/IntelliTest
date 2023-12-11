@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <div class="container">
+	    <a class="navbar-brand" href="/">Quiz app</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		      <div class="navbar-nav m1-auto">
+			      <a class="nav-link active" aria-current="page" href="{% url 'all_categories' %}">#Categories</a>
+			      {% if user.is_authenticated %}
+				  <a class="nav-link" href="{% url 'create_test' %}">Create new test</a>
+				  {% endif %}
+			      <a class="nav-link" href="{% url 'register' %}">Register</a>
+			      {% if user.is_authenticated %}
+				  <a class="nav-link" href="{% url 'result' %}">Result</a>
+				  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+			      {% else %}
+			      <a class="nav-link active" href="{% url 'login' %}">Login</a>
+				  {% endif %}
+		      </div>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="container my-4">
+		<h3 class="my-4">Login</h3>
+		<form method="post">
+			<table class="table table-bordered">
+				{% csrf_token %}
+				{{form.as_table}}
+				<tr>
+					<td colspan="2"><input type="submit" class="btn btn-primary"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

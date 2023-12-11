@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<h3 class="my-4">All categories</h3>
+<div class="row">
+	<div class="col-md-4">
+		{% for category in data  %}
+		<div class="card">
+				<div class="card-body">
+					<h5 class="card-title"><a href="{% url 'category_questions' category.id %}">{{category.title}}</a></h5>
+					<p class="card-text">{{category.details}}</p>
+				</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
