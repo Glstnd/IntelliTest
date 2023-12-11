@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Questions {% endblock %}
+{% block content %}
+<h2 class="my-4">Statistic for 1322</h2>
+<table class = "table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            {% for category in categories %}
+                <th>{{category.title}}</th>
+                <th>Percentage</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+            <tr>
+                {{questions[category].question}}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
