@@ -34,6 +34,7 @@ class QuizQuestion(models.Model):
 
 class UserSubmittedAnswer(models.Model):
     question = models.ForeignKey(QuizQuestion, on_delete=models.CASCADE)
+    category = models.ForeignKey(QuizCategory, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     right_answer = models.CharField(max_length=200)
 

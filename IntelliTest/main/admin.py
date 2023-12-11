@@ -12,7 +12,7 @@ admin.site.register(QuizQuestion, QuizQuestionAdmin)
 
 
 class UserSubmittedAnswerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'question', 'user', 'right_answer']
+    list_display = ['id', 'question', 'user', 'right_answer', 'category']
 
 
 admin.site.register(UserSubmittedAnswer, UserSubmittedAnswerAdmin)
